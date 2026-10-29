@@ -18,6 +18,25 @@ st.write("Enter some text and let the model predict its category.")
 # User input
 user_text = st.text_area("Enter your text here:")
 
+def clean_text(text, stop_words, lemmatizer):
+    import re
+
+    text = text.lower()
+    text = re.sub(r"\d+", "", text)
+    text = re.sub(r"[^a-z\s]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+
+    words = text.split()
+
+    words = [
+        lemmatizer.lemmatize(word)
+        for word in words
+        if word not in stop_words
+    ]
+
+    return " ".join(words)
+
+
 # Prediction button
 
 
