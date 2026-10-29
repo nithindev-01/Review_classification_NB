@@ -4,7 +4,7 @@ import joblib
 
 # Load the saved model and vectorizer
 model = joblib.load("naive_bayes_model.pkl")
-vectorizer = joblib.load("vectorizer.pkl")
+vectorizer = joblib.load("tfidf_vectorizer.pkl")
 
 # Page settings
 st.set_page_config(
