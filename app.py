@@ -20,21 +20,21 @@ user_text = st.text_area("Enter your text here:")
 
 # Prediction button
 
+
 if st.button("Predict Sentiment"):
     if user_text.strip() == "":
         st.warning("Please enter a review.")
     else:
-        cleaned_text = clean_text(user_text, stop_words, lemmatizer)
-        text_vector = vectorizer.transform([cleaned_text])
+        cleaned_text = clean_text(
+            user_text, stop_words, lemmatizer
+        )
 
+        text_vector = vectorizer.transform([cleaned_text])
         prediction = model.predict(text_vector)[0]
 
         if prediction == 1:
             st.success("Prediction: Positive 😊")
-        else:
+        elif prediction == 0:
             st.error("Prediction: Negative ☹️")
-
-            for label, probability in zip(
-                model.classes_, probabilities
-            ):
-                st.write(f"{label}: {probability:.2%}")
+        else:
+            st.write("Unexpected prediction:", prediction)
